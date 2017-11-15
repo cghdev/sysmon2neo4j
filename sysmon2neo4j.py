@@ -158,9 +158,9 @@ def handle_event(data):
                 query += "i.{} = \"{}\"".format(key, val)
                 query += "" if c == len(hashes) else ", "
 
-        query += ", i.Signed = \"{}\"".format(event_data['Signed'])
-        query += ", i.Signature = \"{}\"".format(event_data['Signature'])
-        query += ", i.SignatureStatus = \"{}\"".format(event_data['SignatureStatus'])
+        query += ", i.Signed = \"{}\"".format(event_data['Signed']) if 'Signed' in event_data.keys() else ""
+        query += ", i.Signature = \"{}\"".format(event_data['Signature']) if 'Signature' in event_data.keys() else ""
+        query += ", i.SignatureStatus = \"{}\"".format(event_data['SignatureStatus']) if 'SignatureStatus' in event_data.keys() else ""
 
         # Merge relationships
         query += "\nMERGE (p)-[r1:Loaded]->(i)"
