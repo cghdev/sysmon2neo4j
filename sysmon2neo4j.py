@@ -74,10 +74,10 @@ def handle_event(data):
         query += "\nON CREATE SET p.ProcessId = \"{}\"".format(event_data['ProcessId'])
 
         # Merge image details
-        query += "\nMERGE (i:Image {{\"{}\"}})".format(event_data['Image'].replace("\\","\\\\"))
+        query += "\nMERGE (i:Image {{Image: \"{}\"}})".format(event_data['Image'].replace("\\","\\\\"))
 
         # Merge file details
-        query += "\nMERGE (f:File {{\"{}\"}})".format(event_data['TargetFilename'].replace("\\","\\\\"))
+        query += "\nMERGE (f:File {{File: \"{}\"}})".format(event_data['TargetFilename'].replace("\\","\\\\"))
         query += "\nON CREATE SET "
         query += "f.CreationUtcTime = \"{}\"".format(event_data['CreationUtcTime'])
         query += ", f.PreviousCreationUtcTime = \"{}\"".format(event_data['PreviousCreationUtcTime'])
